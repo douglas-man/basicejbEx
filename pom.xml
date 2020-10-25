@@ -25,7 +25,8 @@
              <maven-ejb-plugin.version>3.1.0</maven-ejb-plugin.version>
         <javax.ejb-api.version>3.2.2</javax.ejb-api.version>
         <junit-jupiter.version>5.6.0</junit-jupiter.version>     
-        <slf4j.version>2.13.3</slf4j.version>     
+        <slf4j.version>2.13.3</slf4j.version>
+        <cargo-maven2-plugin.version>1.6.1</cargo-maven2-plugin.version>
     </properties>
 
     <repositories>
@@ -91,6 +92,26 @@
                                 <addClasspath>true</addClasspath>
                             </manifest>
                         </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>${cargo-maven2-plugin.version}</version>
+                    <configuration>
+                        <wait>true</wait>
+                        <container>
+                            <containerId>jetty8x</containerId>
+                            <type>embedded</type>
+                            <systemProperties>
+                                <!-- <provPersistenceTarget>cargo</provPersistenceTarget> -->
+                            </systemProperties>
+                        </container>
+                        <configuration>
+                            <properties>
+                                <cargo.servlet.port>8082</cargo.servlet.port>
+                            </properties>
+                        </configuration>
                     </configuration>
                 </plugin>
             </plugins>
